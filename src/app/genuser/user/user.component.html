@@ -1,0 +1,44 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="col-md-4 offset-4  shadow-lg bg-danger rounded">
+    <div class="card-body text-white bg-danger ">
+        <img width="15%" src=".\assets\icons\icons8-user-50.png" class="rounded mx-auto d-block" alt="...">
+
+        <div class="card-header header-center">
+            <h3 class="h3 text-center">User Login</h3>
+        </div>
+        <br>
+        <form #userForm="ngForm" (ngSubmit)="userSubmit(userForm)">
+            <div class="form-group">
+                <label for="un"><b>User Id</b></label>
+                <input type="email" name="username" id="u" class="form-control" placeholder="example@gmail.com"
+                    #uname="ngModel" [(ngModel)]="username" minlength="5" required>
+                <span class="alert alert-danger" role="alert" *ngIf="uname && uname.touched 
+                    && uname.invalid">
+                    *Enter an email!!!!.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="ps"><b>Password</b></label>
+                <input type="password" name="password" id="p" class="form-control" placeholder="**************"
+                    #pass="ngModel" [(ngModel)]="password" minlength="8" required>
+                <span class="alert alert-danger " role="alert" *ngIf="pass && pass.touched 
+                    && pass.invalid">
+                    *Enter a password!!!!.
+                </span>
+            </div>
+            <div>
+                <button type="submit" [disabled]="userForm.invalid"
+                    class="btn btn-primary btn-md btn-block">Login</button>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>

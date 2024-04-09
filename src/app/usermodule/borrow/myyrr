@@ -1,0 +1,133 @@
+import { Component, OnInit } from '@angular/core';
+import { AdminBooksService } from 'src/app/adminServices/admin-books.service';
+import { IMember } from 'src/app/adminmodule/members/members';
+import { UserOwnedService } from 'src/app/userServices/user-owned.service';
+import { IBook } from 'src/app/adminmodule/books/books';
+import { AdminMembersService } from 'src/app/adminServices/admin-members.service';
+
+
+@Component({
+  selector: 'app-borrow',
+  templateUrl: './borrow.component.html',
+  styleUrls: ['./borrow.component.css']
+})
+export class BorrowComponent implements OnInit {
+
+  constructor(private bookSer: AdminBooksService, private userDet: UserOwnedService, private memberSer: AdminMembersService, ) { }
+
+  badge;
+  requestedBooks = [];
+  myyr = [];
+  userid;
+  public books = [];
+  ngOnInit() {
+
+    console.log(this.badge)
+    this.getbyStatus("Old&bstatus=New&bstatus=Damaged");
+    if (sessionStorage) {
+      this.userid = sessionStorage.getItem("userid");
+      if (this.userid != null) { }
+    }
+
+
+    this.requestedBooks = JSON.parse(localStorage.getItem("user" + this.userid + ""));
+    this.badge = this.requestedBooks.length;
+  }
+
+  getbyStatus(fil: string) {
+    console.log(fil);
+    this.bookSer.getBookbyStatus(fil)
+      .subscribe(data => this.books = data);
+  }
+
+
+
+  addtoReq(book: IBook) {
+    // if (sessionStorage.getItem("user" + this.userid)) {
+    //   console.log("inddraa");
+
+    // } else {
+    //   console.log("illra");
+    //   localStorage.setItem("user" + this.userid + "", JSON.stringify({}));
+    // }
+
+    if (book.bcopies > 0) {
+      let rbook = {
+        "rid": null,
+        "rtitle": '',
+        "risbn": null,
+      }
+      rbook.rid = book.id;
+      rbook.rtitle = book.btitle;
+      rbook.risbn = book.bisbn;
+      if (this.requestedBooks == null) {
+        console.log("Vattayee")
+
+        this.requestedBooks = this.requestedBooks || [];
+        this.requestedBooks.push(rbook);
+        localStorage.setItem("user" + this.userid + "", JSON.stringify(this.requestedBooks));
+
+        book.bcopies -= 1;
+        this.bookSer.updateBook(book).subscribe();
+
+
+
+
+      }
+      else {
+        console.log("moonji");
+        if (this.requestedBooks.length < 3) {
+          this.requestedBooks.push(rbook);
+          localStorage.setItem("user" + this.userid + "", JSON.stringify(this.requestedBooks));
+
+
+          book.bcopies -= 1;
+          this.bookSer.updateBook(book).subscribe();
+
+
+
+
+
+        } else {
+          alert("You can not take more than 3 books...")
+        }
+      }
+
+      // rbook.rid = book.id;
+      // rbook.rtitle = book.btitle;
+      // this.requestedBooks = this.requestedBooks || [];
+      // this.requestedBooks.push(rbook);
+      // localStorage.setItem("user" + this.userid + "", JSON.stringify(this.requestedBooks));
+      this.badge = this.requestedBooks.length;
+    }
+    else {
+      if (book.bcopies == 0) {
+        alert("Book is not available now..")
+      }
+      else {
+        alert("You cant take more than 3 books")
+      }
+    }
+  }
+
+  delfrmReq(borrow) {
+    let index = this.requestedBooks.findIndex(obj => obj.rtitle == borrow.rtitle);
+    console.log(index);
+    this.requestedBooks.splice(index, 1);
+    this.badge = this.requestedBooks.length;
+
+    // let bookid = borrow.rid;
+
+    // let book: IBook;
+    // this.bookSer.getBookbyId(bookid)
+    //   .subscribe(data => book = data);
+    // book.bcopies += 1;
+    // this.bookSer.updateBook(book).subscribe()
+  }
+
+  delsave() {
+    localStorage.setItem("user" + this.userid + "", JSON.stringify(this.requestedBooks));
+    this.badge = this.requestedBooks.length;
+  }
+
+}

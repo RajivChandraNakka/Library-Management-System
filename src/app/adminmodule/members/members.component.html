@@ -1,0 +1,303 @@
+<br>
+<div>
+    <div style="padding-left: 3%;">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#adminMembersModal"><img
+                style="padding-bottom: 3px; width: 40px; font-size: smaller;" src=".\assets\icons\icons8-add-50 (1).png"
+                alt="">ADD USER</button>
+    </div>
+    <div class="modal fade" id="adminMembersModal" tabindex="-1" role="dialog" aria-labelledby="adminMembersModalTitle"
+        aria-hidden="true">
+        <form [formGroup]='adminMembers' (ngSubmit)="onSubmit()">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="adminMembersModalTitle">Add a user...</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div aria-hidden="true">&times;</div>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="uname" name="uname"
+                                    placeholder="Enter user name" formControlName="uname">
+                                <span
+                                    *ngIf="adminMembers.get('uname') && (adminMembers.get('uname').touched||adminMembers.get('uname').dirty) && adminMembers.get('uname').invalid">
+                                    <span *ngIf="adminMembers.get('uname').errors.required">
+                                        *this field is required...
+                                    </span>
+                                    <span *ngIf="adminMembers.get('uname').errors.minlength">
+                                        *atleast 5 characters is required...
+                                    </span>
+
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="admissionid">Admission id</label>
+                                <input type="number" class="form-control" id="uadmid" name="uadmid"
+                                    placeholder="Enter user admission id" formControlName="uadmid">
+                                <span
+                                    *ngIf="adminMembers.get('uadmid') && (adminMembers.get('uadmid').touched||adminMembers.get('uadmid').dirty) && adminMembers.get('uadmid').invalid">
+                                    <span *ngIf="adminMembers.get('uadmid').errors.required">
+                                        *this field is required...
+                                    </span>
+                                    <span *ngIf="adminMembers.get('uadmid').errors.minlength">
+                                        *atleast 5 digits is required...
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dep">Department</label>
+                                <select class="form-control" id="udep" name="udep" formControlName="udep">
+
+                                    <option>ECE</option>
+                                    <option>CSE</option>
+                                    <option>ME</option>
+                                    <option>CE</option>
+                                    <option>IT</option>
+                                    <option>EEE</option>
+                                </select>
+                                <span
+                                    *ngIf="adminMembers.get('udep') && adminMembers.get('udep').touched && adminMembers.get('udep').invalid">
+                                    *this field is required...
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email id</label>
+                                <input type="text" class="form-control" id="umail" name="umail"
+                                    placeholder="Enter the email" formControlName="umail">
+                                <span
+                                    *ngIf="adminMembers.get('umail') && (adminMembers.get('umail').touched||adminMembers.get('umail').dirty) && adminMembers.get('umail').invalid">
+                                    <span *ngIf="adminMembers.get('umail').errors.required">
+                                        *this field is required...
+                                    </span>
+                                    <span *ngIf="adminMembers.get('umail').errors.email">
+                                        *not following email format...
+                                    </span>
+                                </span>
+                                <!-- <span *ngIf="check">
+                                    *email already existing...
+                                </span> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Password">Password</label>
+                                <input type="text" class="form-control" id="upassword" name="upassword"
+                                    placeholder="Enter the password" formControlName="upassword">
+                                <span
+                                    *ngIf="adminMembers.get('upassword') && (adminMembers.get('upassword').touched||adminMembers.get('upassword').dirty) && adminMembers.get('upassword').invalid">
+                                    <span *ngIf="adminMembers.get('upassword').errors.required">
+                                        *this field is required...
+                                    </span>
+                                    <span *ngIf="adminMembers.get('upassword').errors.minlength">
+                                        *atleast 8 characters is required...
+                                    </span>
+
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" [disabled]="adminMembers.invalid">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> <!-- search section using pipe -->
+    <div style="display: inline-block;" class="col-4 offset-9 form-group">
+        <input style="width:17rem;" placeholder="Search" type="text" class="form-control" [(ngModel)]='memberSearch'>
+    </div>
+    <br>
+    <div style="padding-left: 3%;">
+        <div class="card" style="width:66.5rem;">
+            <div>
+                <table class="table" style="width: 100%;">
+                    <thead class="thead bg-danger text-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Admission Id</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <!-- <th scope="col">Status</th> -->
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let member of members| memberSearch:memberSearch">
+                            <td>{{member.id}}</td>
+                            <td>{{member.uname}}</td>
+                            <td>{{member.uadmid}}</td>
+                            <td>{{member.udep}}</td>
+                            <td>{{member.umail}}</td>
+
+
+                            <td>{{member.upassword}}</td>
+                            <!-- <td>{{member.ustatus}}</td> -->
+                            <!-- <td *ngIf="member.ustatus=='1'">Request</td>
+                            <td *ngIf="member.ustatus=='0'"></td> -->
+
+                            <td>
+                                <div style="display:inline; padding-left: 3px; padding-right: 3px;">
+                                    <button style="display: inline; " type="button" class="btn btn-outline-danger"
+                                        data-toggle="tooltip" data-placement="top" title="Delete user"
+                                        (click)="delete(member.id)">
+                                        <img style="width: 20px; padding-bottom: 2px"
+                                            src=".\assets\icons\icons8-delete-50.png" alt="">
+                                    </button>
+                                </div>
+                                <div style="display:inline;  padding-left: 3px; padding-right: 3px;">
+                                    <div style="display:inline;  padding-left: 3px; padding-right: 3px;">
+                                        <button style="display: inline; " type="button" class="btn btn-outline-info"
+                                            data-toggle="tooltip" data-placement="top" title="Edit user"
+                                            data-toggle="modal" data-target="#adminMembersModalUp"
+                                            (click)="edit(member)">
+                                            <img style="width: 20px; padding-bottom: 2px"
+                                                src=".\assets\icons\icons8-edit-50.png" alt="">
+                                        </button>
+                                    </div>
+                                    <div class="modal fade" id="adminMembersModalUp" tabindex="-1" role="dialog"
+                                        aria-labelledby="adminMembersModalUpTitle" aria-hidden="true">
+                                        <form [formGroup]='adminMembersUp'>
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="adminMembersModalUpTitle">Update a
+                                                            user...</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <div aria-hidden="true">&times;</div>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="name">Name</label>
+                                                                <input type="text" class="form-control" id="uname"
+                                                                    name="uname" placeholder="Enter user name"
+                                                                    formControlName="uname"
+                                                                    [(ngModel)]="memberSer.currentMember.uname">
+                                                                <span
+                                                                    *ngIf="adminMembersUp.get('uname') && (adminMembersUp.get('uname').touched||adminMembersUp.get('uname').dirty) && adminMembersUp.get('uname').invalid">
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('uname').errors.required">
+                                                                        *this field is required...
+                                                                    </span>
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('uname').errors.minlength">
+                                                                        *atleast 5 characters is required...
+                                                                    </span>
+
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="admissionid">Admission id</label>
+                                                                <input type="number" class="form-control" id="uadmid"
+                                                                    name="uadmid" placeholder="Enter user admission id"
+                                                                    formControlName="uadmid"
+                                                                    [(ngModel)]="memberSer.currentMember.uadmid">
+                                                                <span
+                                                                    *ngIf="adminMembersUp.get('uadmid') && (adminMembersUp.get('uadmid').touched||adminMembersUp.get('uadmid').dirty) && adminMembersUp.get('uadmid').invalid">
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('uadmid').errors.required">
+                                                                        *this field is required...
+                                                                    </span>
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('uadmid').errors.minlength">
+                                                                        *atleast 5 digits is required...
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="dep">Department</label>
+                                                                <select class="form-control" id="udep" name="udep"
+                                                                    formControlName="udep"
+                                                                    [(ngModel)]="memberSer.currentMember.udep">
+
+                                                                    <option>ECE</option>
+                                                                    <option>CSE</option>
+                                                                    <option>ME</option>
+                                                                    <option>CE</option>
+                                                                    <option>IT</option>
+                                                                    <option>EEE</option>
+                                                                </select>
+                                                                <span
+                                                                    *ngIf="adminMembersUp.get('udep') && adminMembersUp.get('udep').touched && adminMembersUp.get('udep').invalid">
+                                                                    *this field is required...
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="email">Email id</label>
+                                                                <input type="text" class="form-control" id="umail"
+                                                                    name="umail" placeholder="Enter the email"
+                                                                    formControlName="umail"
+                                                                    [(ngModel)]="memberSer.currentMember.umail">
+                                                                <span
+                                                                    *ngIf="adminMembersUp.get('umail') && (adminMembersUp.get('umail').touched||adminMembersUp.get('umail').dirty) && adminMembersUp.get('umail').invalid">
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('umail').errors.required">
+                                                                        *this field is required...
+                                                                    </span>
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('umail').errors.email">
+                                                                        *not following email format...
+                                                                    </span>
+
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="Password">Password</label>
+                                                                <input type="text" class="form-control" id="upassword"
+                                                                    name="upassword" placeholder="Enter the password"
+                                                                    formControlName="upassword"
+                                                                    [(ngModel)]="memberSer.currentMember.upassword">
+                                                                <span
+                                                                    *ngIf="adminMembersUp.get('upassword') && (adminMembersUp.get('upassword').touched||adminMembersUp.get('upassword').dirty) && adminMembersUp.get('upassword').invalid">
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('upassword').errors.required">
+                                                                        *this field is required...
+                                                                    </span>
+                                                                    <span
+                                                                        *ngIf="adminMembersUp.get('upassword').errors.minlength">
+                                                                        *atleast 8 characters is required...
+                                                                    </span>
+
+
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-danger"
+                                                            [disabled]="adminMembersUp.invalid"
+                                                            (click)="OnUpdate(memberSer.currentMember)">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,401 @@
+<br>
+<div style="width: 100%;">
+    <div style="padding-left: 3%;">
+        <div class="card" style="width:66.5rem;">
+            <div class="card-body">
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('All')">ALL</button>
+                </span>
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('New')">NEW BOOKS</button>
+                </span>
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('Old')">OLD BOOKS</button>
+                </span>
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('Lost')">LOST
+                        BOOKS</button>
+                </span>
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('Damaged')">DAMAGED
+                        BOOKS</button>
+                </span>
+                <span id="sp">
+                    <button type="button" class="btn btn-outline-danger" (click)="bookStatus('Replacement')">SUBJECT FOR
+                        REPLACEMENT</button>
+                </span>
+            </div>
+
+        </div>
+        <br>
+        <div>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#adminBookModal"><img
+                    style="padding-bottom: 3px; width: 40px; font-size: smaller;"
+                    src=".\assets\icons\icons8-add-50 (1).png" alt="">ADD BOOKS</button>
+            <div class="modal fade" id="adminBookModal" tabindex="-1" role="dialog"
+                aria-labelledby="adminBookModalTitle" aria-hidden="true">
+                <form [formGroup]='adminBooks' (ngSubmit)="onSubmit()">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <!-- button sections.. -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="adminBookModalTitle">Add a book...</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <div aria-hidden="true">&times;</div>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- form section.... -->
+                                <div>
+                                    <div class="form-group">
+                                        <label for="title">Book title</label>
+                                        <input type="text" class="form-control" id="btitle" name="btitle"
+                                            placeholder="Enter book title" formControlName="btitle">
+                                        <span
+                                            *ngIf="adminBooks.get('btitle') && (adminBooks.get('btitle').touched||adminBooks.get('btitle').dirty) && adminBooks.get('btitle').invalid">
+                                            <span *ngIf="adminBooks.get('btitle').errors.required">
+                                                *this field is required...
+                                            </span>
+                                            <span *ngIf="adminBooks.get('btitle').errors.minlength">
+                                                *atleast 5 characters is required...
+                                            </span>
+
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="catag">Category</label>
+                                        <select class="form-control" id="bcatag" name="bcatag" formControlName="bcatag">
+
+                                            <option>Science</option>
+                                            <option>Satire</option>
+                                            <option>Drama</option>
+                                            <option>Action</option>
+                                            <option>Adventure</option>
+                                            <option>Romance</option>
+                                            <option>Others</option>
+                                        </select>
+                                        <span
+                                            *ngIf="adminBooks.get('bcatag') && adminBooks.get('bcatag').touched && adminBooks.get('bcatag').invalid">
+                                            *this field is required...
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="author">Author</label>
+                                        <input type="text" class="form-control" id="bauthor"
+                                            placeholder="Enter book author" name="bauthor" formControlName="bauthor">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="copies">Copies</label>
+                                        <input type="number" class="form-control" id="bcopies" name="bcopies"
+                                            placeholder="Enter the number of copies" formControlName="bcopies">
+                                        <span
+                                            *ngIf="adminBooks.get('bcopies') && (adminBooks.get('bcopies').touched||adminBooks.get('bcopies').dirty) && adminBooks.get('bcopies').invalid">
+                                            <span *ngIf="adminBooks.get('bcopies').errors.required">
+                                                *this field is required...
+                                            </span>
+                                            <span *ngIf="adminBooks.get('bcopies').errors.min">
+                                                *atleast 1 number is required...
+                                            </span>
+
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pub">Book pub</label>
+                                        <input type="text" class="form-control" id="bpub" name="bpub"
+                                            placeholder="Enter name of publication" formControlName="bpub">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pubname">Publisher name</label>
+                                        <input type="text" class="form-control" id="pubname" name="pubname"
+                                            placeholder="Enter name of publisher" formControlName="pubname">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="isbn">ISBN</label>
+                                        <input type="text" class="form-control" id="bisbn" name="bisbn"
+                                            placeholder="Enter ISBN" formControlName="bisbn">
+                                        <span
+                                            *ngIf="adminBooks.get('bisbn') && adminBooks.get('bisbn').touched && adminBooks.get('bisbn').invalid">
+                                            *this field is required...
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="year">Copyright year</label>
+                                        <input type="number" class="form-control" id="byear" name="byear"
+                                            placeholder="Enter Copyright year" formControlName="byear">
+                                        <span
+                                            *ngIf="adminBooks.get('byear') && adminBooks.get('byear').touched && adminBooks.get('byear').invalid">
+                                            *this field is required...
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Date added</label>
+                                        <input type="date" class="form-control" id="bdate" name="bdate"
+                                            formControlName="bdate">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+
+                                        <select class="form-control" id="bstatus" name="bstatus"
+                                            formControlName="bstatus">
+
+                                            <option>Old</option>
+                                            <option>New</option>
+                                            <option>Lost</option>
+                                            <option>Damaged</option>
+                                            <option>Replacement</option>
+
+                                        </select>
+                                        <span
+                                            *ngIf="adminBooks.get('bstatus') && adminBooks.get('bstatus').touched && adminBooks.get('bstatus').invalid">
+                                            *this field is required...
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger"
+                                    [disabled]="adminBooks.invalid">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- search section using pipe -->
+        <div style="display: inline-block;" class="col-4 offset-9 form-group">
+            <input style="width:16.7rem;" placeholder="Search" type="text" class="form-control"
+                [(ngModel)]='bookSearch'>
+        </div>
+    </div>
+
+    <div style="padding-left: 3%; width: 70%;">
+        <div class="card" style="width:66.5rem;">
+            <div>
+                <table class="table">
+                    <thead style="width:66.5rem;" class="thead bg-danger text-light">
+                        <tr>
+                            <th scope="col">ACC NO</th>
+                            <th scope="col">TITLE</th>
+                            <th scope="col">CATE</th>
+                            <th scope="col">AUTHOR</th>
+                            <th scope="col">CPY</th>
+                            <th scope="col">BOOK PUB</th>
+                            <th scope="col">PUB NAME</th>
+                            <th scope="col">ISBN</th>
+                            <th scope="col">YEAR</th>
+                            <th scope="col">DATE ADDED</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let book of books|bookSearch:bookSearch">
+                            <td>{{book.id}}</td>
+                            <td>{{book.btitle}}</td>
+                            <td>{{book.bcatag}}</td>
+                            <td>{{book.bauthor}}</td>
+                            <td>{{book.bcopies}}</td>
+                            <td>{{book.bpub}}</td>
+                            <td>{{book.pubname}}</td>
+                            <td>{{book.bisbn}}</td>
+                            <td>{{book.byear}}</td>
+                            <td>{{book.bdate}}</td>
+                            <td>{{book.bstatus}}</td>
+
+                            <td>
+                        <tr>
+                            <div>
+                                <button type="button" class="btn btn-outline-danger" data-toggle="tooltip"
+                                    data-placement="top" title="Delete book" (click)="delete(book.id)">
+                                    <img style="width: 20px;padding-bottom: 2px;"
+                                        src=".\assets\icons\icons8-delete-50.png" alt="">
+                                </button>
+                            </div>
+                            <div style="padding-top: 5px;">
+                                <button type="button" class="btn btn-outline-info" data-toggle="tooltip"
+                                    data-placement="top" title="Edit book" data-toggle="modal"
+                                    data-target="#adminBookModalUp" (click)="edit(book)">
+                                    <img style="width: 20px; padding-bottom: 2px;"
+                                        src=".\assets\icons\icons8-edit-50.png" alt="">
+
+                                </button>
+                                <!-- 
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#adminBookModalUp"><img
+                            style="padding-bottom: 3px; width: 40px; font-size: smaller;" src=".\assets\icons\icons8-add-50 (1).png"
+                            alt="">ADD BOOKS</button> -->
+                                <div class="modal fade" id="adminBookModalUp" tabindex="-1" role="dialog"
+                                    aria-labelledby="adminBookModalUpTitle" aria-hidden="true">
+                                    <!-- (ngSubmit)="OnUpdate()" -->
+                                    <form [formGroup]='adminBooksUp'>
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="adminBookModalUpTitle">Update a book...
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <div aria-hidden="true">&times;</div>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <label for="title">Book title</label>
+                                                            <input type="text" class="form-control" id="btitle"
+                                                                name="btitle" placeholder="Enter book title"
+                                                                formControlName="btitle"
+                                                                [(ngModel)]="bookSer.currentBook.btitle">
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('btitle') && (adminBooksUp.get('btitle').touched||adminBooksUp.get('btitle').dirty) && adminBooksUp.get('btitle').invalid">
+                                                                <span
+                                                                    *ngIf="adminBooksUp.get('btitle').errors.required">
+                                                                    *this field is required...
+                                                                </span>
+                                                                <span
+                                                                    *ngIf="adminBooksUp.get('btitle').errors.minlength">
+                                                                    *atleast 5 characters is required...
+                                                                </span>
+
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="catag">Category</label>
+                                                            <select class="form-control" id="bcatag" name="bcatag"
+                                                                formControlName="bcatag"
+                                                                [(ngModel)]="bookSer.currentBook.bcatag">
+
+                                                                <option>Science</option>
+                                                                <option>Satire</option>
+                                                                <option>Drama</option>
+                                                                <option>Action</option>
+                                                                <option>Adventure</option>
+                                                                <option>Romance</option>
+                                                                <option>Others</option>
+                                                            </select>
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('bcatag') && adminBooksUp.get('bcatag').touched && adminBooksUp.get('bcatag').invalid">
+                                                                *this field is required...
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="author">Author</label>
+                                                            <input type="text" class="form-control" id="bauthor"
+                                                                placeholder="Enter book author" name="bauthor"
+                                                                formControlName="bauthor"
+                                                                [(ngModel)]="bookSer.currentBook.bauthor">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="copies">Copies</label>
+                                                            <input type="number" class="form-control" id="bcopies"
+                                                                name="bcopies" placeholder="Enter the number of copies"
+                                                                formControlName="bcopies"
+                                                                [(ngModel)]="bookSer.currentBook.bcopies">
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('bcopies') && (adminBooksUp.get('bcopies').touched||adminBooksUp.get('bcopies').dirty) && adminBooksUp.get('bcopies').invalid">
+                                                                <span
+                                                                    *ngIf="adminBooksUp.get('bcopies').errors.required">
+                                                                    *this field is required...
+                                                                </span>
+                                                                <span *ngIf="adminBooksUp.get('bcopies').errors.min">
+                                                                    *atleast 1 number is required...
+                                                                </span>
+
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="pub">Book pub</label>
+                                                            <input type="text" class="form-control" id="bpub"
+                                                                name="bpub" placeholder="Enter name of publication"
+                                                                formControlName="bpub"
+                                                                [(ngModel)]="bookSer.currentBook.bpub">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="pubname">Publisher name</label>
+                                                            <input type="text" class="form-control" id="pubname"
+                                                                name="pubname" placeholder="Enter name of publisher"
+                                                                formControlName="pubname"
+                                                                [(ngModel)]="bookSer.currentBook.pubname">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="isbn">ISBN</label>
+                                                            <input type="text" class="form-control" id="bisbn"
+                                                                name="bisbn" placeholder="Enter ISBN"
+                                                                formControlName="bisbn"
+                                                                [(ngModel)]="bookSer.currentBook.bisbn">
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('bisbn') && adminBooksUp.get('bisbn').touched && adminBooksUp.get('bisbn').invalid">
+                                                                *this field is required...
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="year">Copyright year</label>
+                                                            <input type="number" class="form-control" id="byear"
+                                                                name="byear" placeholder="Enter Copyright year"
+                                                                formControlName="byear"
+                                                                [(ngModel)]="bookSer.currentBook.byear">
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('byear') && adminBooksUp.get('byear').touched && adminBooksUp.get('byear').invalid">
+                                                                *this field is required...
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date">Date added</label>
+                                                            <input type="date" class="form-control" id="bdate"
+                                                                name="bdate" formControlName="bdate"
+                                                                [(ngModel)]="bookSer.currentBook.bdate">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="status">Status</label>
+
+                                                            <select class="form-control" id="bstatus" name="bstatus"
+                                                                formControlName="bstatus"
+                                                                [(ngModel)]="bookSer.currentBook.bstatus">
+
+                                                                <option>Old</option>
+                                                                <option>New</option>
+                                                                <option>Lost</option>
+                                                                <option>Damaged</option>
+                                                                <option>Replacement</option>
+
+                                                            </select>
+                                                            <span
+                                                                *ngIf="adminBooksUp.get('bstatus') && adminBooksUp.get('bstatus').touched && adminBooksUp.get('bstatus').invalid">
+                                                                *this field is required...
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-danger"
+                                                        [disabled]="adminBooksUp.invalid"
+                                                        (click)="OnUpdate(bookSer.currentBook)">Update</button>
+                                                    <!-- (click)="OnUpdate(bookSer.currentBook)" -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </tr>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

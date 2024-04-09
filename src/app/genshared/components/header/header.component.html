@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <a id="ltrspcng" class="navbar-brand" routerLink="home">LIBRARY MS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+           
+            
+           
+
+        </ul>
+
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item dropdown">
+                <!-- <span>
+                    <img style="padding-bottom: 3px; width: 30px;" src=".\assets\icons\icons8-user-50.png" alt="">
+                    <a style="display: inline-block;" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="true" aria-expanded="false" id="ltrspcng">SIGN IN</a>
+
+                    <div class="dropdown-menu text-danger">
+                        <a class="dropdown-item" routerLink="user" id="ltrspcng">USER</a>
+                        <a class="dropdown-item" routerLink="admin" id="ltrspcng">ADMIN</a>
+
+                    </div>
+                </span> -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                    <img style="padding-bottom: 3px; width: 30px; padding-right: 3px;"
+                        src=".\assets\icons\icons8-user-50.png" alt="">LOGIN
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade bg-danger" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">
+                                    Login as..
+                                </h5>
+                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button> -->
+                            </div>
+                            <div class="modal-body ">
+                                <div style="display: inline; padding-left: 40px;">
+                                    <button class="btn btn-outline-danger"
+                                        style="border-radius: 50%; display: inline-block;">
+                                        <img style="width: 150px; border-radius: 50%;"
+                                            src=".\assets\icons\icons8-user-100.png" routerLink="user"
+                                            data-dismiss="modal">
+                                        <p class="h5 text-light">
+                                            User
+                                        </p>
+                                    </button>
+
+                                </div>
+                                <div style="display: inline;  padding-left: 32px;">
+                                    <button class="btn btn-outline-danger"
+                                        style="border-radius: 50%; display: inline-block;">
+                                        <img style="width: 150px; border-radius: 50%;"
+                                            src=".\assets\icons\icons8-admin-settings-male-100.png" routerLink="admin"
+                                            data-dismiss="modal">
+                                        <p class="h5 text-light">
+                                            Admin
+                                        </p>
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <div style="padding-right: 180px;">
+                                    <button type="button" class="btn btn-danger"
+                                        data-dismiss="modal">&nbsp;&nbsp;&nbsp;&nbsp;Close&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                </div>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src=".\assets\images\alfons-morales-YLSwjSy7stw-unsplash (2).jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+</div>

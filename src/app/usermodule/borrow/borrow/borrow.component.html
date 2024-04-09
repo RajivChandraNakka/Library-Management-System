@@ -1,0 +1,202 @@
+<!-- <p>borrow works!</p> -->
+<br>
+
+<div>
+
+
+    <!-- <div *ngIf="requestedBooks">
+        {{jsonSet()}}
+    </div> -->
+    <div style="padding-left: 4%;">
+        <div style="display: inline;">
+            <!-- Button trigger modal (click)="jsonSet()" -->
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#requestBooks"
+                data-backdrop="static">
+                Requested <span class="badge badge-light">{{badge}}</span>
+                <span class="sr-only">unread messages</span>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="requestBooks" tabindex="-1" role="dialog" aria-labelledby="requestBooksLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="requestBooksLabel">Requested Books...</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+
+                            <table class="table">
+                                <thead class="thead bg-warning text-light">
+                                    <tr>
+                                        <!-- <th scope="col">ACC NO</th> -->
+                                        <th scope="col">BOOK TITLE</th>
+                                        <th scope="col">CATAGORY</th>
+                                        <th scope="col">ISBN</th>
+                                        <th scope="col">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="requestedBooks">
+                                    <tr *ngFor="let borrow of requestedBooks">
+
+                                        <td>{{borrow?.btitle}}</td>
+                                        <td>{{borrow?.bcatag}}</td>
+                                        <td>{{borrow?.bisbn}}</td>
+                                        <td>
+                                            <div style="padding-left: 6px; padding-right: 4px;">
+                                                <button style="padding-left: 4px; padding-right: 4px;" type="button"
+                                                    class="btn btn-outline-danger" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete a request"
+                                                    (click)="delfrmReq(borrow)">
+                                                    <img src=".\assets\icons\icons8-delete-64.png" alt=""
+                                                        style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                        srcset="">
+                                                    <!-- <p style="padding-left:10px;" style="display: inline;">Delete</p> -->
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <p class=" text-muted text-center">You can take only 4 books..</p>
+                            <!-- <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-block" (click)="delsave()"
+                            data-dismiss="modal">Save</button> -->
+                        </div>
+                        <!-- <div *ngIf="requestedBooks" class="card">
+                            <div class="card" *ngFor="let borrow of requestedBooks">
+                                {{borrow?.btitle}}
+
+
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: inline; padding-left: 4%;">
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#recievedBooks"
+                data-backdrop="static">
+                Recieved <span class="badge badge-light">{{dodge}}</span>
+                <span class="sr-only">unread messages</span>
+            </button>
+            <div class="modal fade" id="recievedBooks" tabindex="-1" role="dialog" aria-labelledby="recievedBooksLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="recievedBooksLabel">Recieved Books...</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+
+                            <table class="table">
+                                <thead class="thead bg-success text-light">
+                                    <tr>
+                                        <th scope="col">BOOK TITLE</th>
+                                        <th scope="col">CATAGORY</th>
+                                        <th scope="col">ISBN</th>
+                                        <th scope="col">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="recievedBooks">
+                                    <tr *ngFor="let borrow of recievedBooks">
+                                        <td>{{borrow?.btitle}}</td>
+                                        <td>{{borrow?.bcatag}}</td>
+                                        <td>{{borrow?.bisbn}}</td>
+                                        <td>
+                                            <div style="display: inline;">
+                                                <div style="display: inline; padding-left: 4px; padding-right: 4px;">
+                                                    <button
+                                                        style="display: inline; padding-left: 4px; padding-right: 4px;"
+                                                        type="button" class="btn btn-outline-danger"
+                                                        data-toggle="tooltip" data-placement="top" title="Delete book"
+                                                        (click)="delfrmRec(borrow)">
+                                                        <img style="display: inline;"
+                                                            src=".\assets\icons\icons8-cancel-64.png" alt=""
+                                                            style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                            srcset="">
+                                                        <!-- <p style="padding-left:10px;" style="display: inline;">Delete</p> -->
+                                                    </button>
+                                                </div>
+                                                <div style="display: inline;  padding-left: 4px; padding-right: 4px;">
+                                                    <button
+                                                        style="display: inline;  padding-left: 4px; padding-right: 4px; "
+                                                        type="button" class="btn btn-outline-info" data-toggle="tooltip"
+                                                        data-placement="top" title="Read book"
+                                                        (click)="readFrmRec(borrow)">
+                                                        <img style="display: inline;"
+                                                            src=".\assets\icons\icons8-document-64.png" alt=""
+                                                            style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                            srcset="">
+                                                        <!-- <p style="padding-left:10px;" style="display: inline;">Delete</p> -->
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <p class=" text-muted text-center">You can take only 4 books..</p>
+                            <!-- <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-block" (click)="delsave()"
+                        data-dismiss="modal">Save</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: inline-block;" class="col-4 offset-9 form-group">
+        <input style="width:17rem;" placeholder="Search" type="text" class="form-control" [(ngModel)]='bookSearch'>
+    </div>
+    <div style="padding-left: 4%;">
+        <div class="card" style="width:66.5rem;">
+            <div>
+                <table class="table">
+                    <thead class="thead bg-danger text-light">
+                        <tr>
+                            <th scope="col">ACC NO</th>
+                            <th scope="col">BOOK TITLE</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">AUTHOR</th>
+                            <th scope="col">ISBN</th>
+                            <th scope="col">COPIES</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let book of books | borrowSearch:bookSearch">
+                            <td>{{book.id}}</td>
+                            <td>{{book.btitle}}</td>
+                            <td>{{book.bcatag}}</td>
+                            <td>{{book.bauthor}}</td>
+                            <td>{{book.bisbn}}</td>
+                            <td>{{book.bcopies}}</td>
+                            <td>
+                                <div>
+                                    <button type="button" class="btn btn-outline-success" data-toggle="tooltip"
+                                        data-placement="top" title="Request a book" (click)="addtoReq(book)">
+                                        <img style="display: inline;" src=".\assets\icons\icons8-plus-64.png" alt=""
+                                            style="display: inline-block; padding-bottom: 2px; width: 20px;" srcset="">
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

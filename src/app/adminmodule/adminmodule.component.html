@@ -1,0 +1,63 @@
+<div *ngIf="adminProfile">
+
+    <div class="bg-danger">
+        <div class="card text-white bg-danger " style="width: 100%;">
+            <div class="card-header">
+                <p class="h5 text-center">Welcome Librarian!!!</p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <img style="width: 100%;" src=".\assets\images\taylor-ann-wright-xNW9rWnDc4M-unsplash (2).jpg" alt="">
+    </div>
+
+    <div class="bg-danger">
+        <div class="card text-white bg-danger " style="width: 100%;">
+            <div class="card-header">
+                <p style="font-style: italic;" class="h6 text-center">“I have always imagined that Paradise will be a
+                    kind of library.”</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-left: 5%; padding-right: 2%;" class="card sm-3" style="max-width: 100%">
+        <div class="row no-gutters">
+            <div class="col-sm-2">
+
+                <div class="card-body">
+                    <h5 class="card-title">Welcome {{adminProfile.aname}}</h5>
+
+                    <ul style="list-style: none;">
+                        <li>
+                            <a class="btn btn-block btn-danger" [routerLink]="'transaction'"> Transaction
+                                <span class="badge badge-light">{{badge}}</span>
+                                <span class="sr-only">unread messages</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-block btn-danger" [routerLink]="'books'"> Books</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-block btn-danger" [routerLink]="'members'"> Members</a>
+                        </li>
+
+
+
+                        <li>
+                            <a class="btn btn-block btn-primary" href='#' (click)="resetSession()"> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <div style="width: 80%;">
+                <router-outlet></router-outlet>
+                <br><br>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

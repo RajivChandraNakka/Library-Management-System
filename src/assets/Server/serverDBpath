@@ -1,0 +1,2 @@
+cd C:\Users\ideapad\Desktop\Angular\LibraryMS\src\assets\Server
+json-server -p 3000 db.json

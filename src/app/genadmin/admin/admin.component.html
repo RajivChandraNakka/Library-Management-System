@@ -1,0 +1,51 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- col-md-4 offset-4  -->
+<!-- style="margin-left: 20%; margin-right: 20%;" -->
+<div class="col-md-4 offset-4  shadow-lg bg-danger rounded">
+    <div class="card-body text-white bg-danger ">
+        <img width="15%" src=".\assets\icons\icons8-admin-settings-male-50.png" class="rounded mx-auto d-block"
+            alt="...">
+        <div class="card-header header-center">
+            <h3 class="h3 text-center">Admin Login</h3>
+        </div>
+
+        <br>
+        <form #adminForm="ngForm" (ngSubmit)="adminSubmit(adminForm)">
+            <div class="form-group">
+                <label for="un"><b>Admin Id</b></label>
+                <input type="email" name="adminname" id="u" class="form-control" placeholder="example@gmail.com"
+                    #aname="ngModel" [(ngModel)]="adminname" minlength="5" required>
+            </div>
+            <span class="alert alert-danger" role="alert" *ngIf="aname && aname.touched 
+            && aname.invalid">
+                *Enter an email!!!!.
+            </span>
+            <div class="form-group">
+                <div>
+                    <label for="ps"><b>Password</b></label>
+                    <input type="password" name="password" id="p" class="form-control" placeholder="**************"
+                        #pass="ngModel" [(ngModel)]="password" minlength="8" required>
+                </div>
+
+                <span class="alert alert-danger " role="alert" *ngIf="pass && pass.touched 
+                    && pass.invalid">
+                    *Enter a password!!!!.
+                </span>
+            </div>
+            <div>
+                <!-- <a class="btn btn-primary btn-md btn-block" routerLink='books' role="button">Submit</a> -->
+                <button type="submit" [disabled]="adminForm.invalid"
+                    class="btn btn-primary btn-md btn-block">Login</button>
+                <br>
+
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>

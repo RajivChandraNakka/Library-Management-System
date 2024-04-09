@@ -1,0 +1,202 @@
+<br>
+
+<div style="padding-left: 3%;">
+    <div class="card" style="width:66.5rem;">
+
+        <div>
+            <div>
+
+                <div class="card-md-6 ">
+                    <div class="row no-gutters">
+                        <div class="card col-md-6">
+                            <div class="card-header text-center">
+                                Request Section
+                            </div>
+                            <table class="table">
+                                <thead class="thead bg-warning text-light">
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Admission Id</th>
+                                        <th scope="col">Department</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of reqUsers">
+                                        <td>{{user.id}}</td>
+                                        <td>{{user.uname}}</td>
+                                        <td>{{user.uadmid}}</td>
+                                        <td>{{user.udep}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info" data-toggle="modal"
+                                                data-target="#requestBooks" (click)="view(user)" data-placement="top"
+                                                title="View requested books">
+                                                <img style="display: inline;" src=".\assets\icons\icons8-file-64.png"
+                                                    alt=""
+                                                    style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                    srcset="">
+
+                                            </button>
+                                            <div class="modal fade" id="requestBooks" tabindex="-1" role="dialog"
+                                                aria-labelledby="requestBooksLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="requestBooksLabel">Requested
+                                                                Books...</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div>
+                                                            <!-- <table>
+                                                                <tr *ngFor="let m of reqBooks">
+                                                                    <td>{{m.btitle}}</td>
+                                                                    <td>
+                                                                        <button (click)="ace(m)">
+                                                                            Accept
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table> -->
+
+                                                            <table class="table">
+                                                                <thead class="thead bg-success text-light">
+                                                                    <tr>
+                                                                        <!-- <th scope="col">ACC NO</th> -->
+                                                                        <th scope="col">BOOK TITLE</th>
+                                                                        <th scope="col">CATAGORY</th>
+                                                                        <th scope="col">ISBN</th>
+                                                                        <th scope="col">ACTION</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody *ngIf="reqBooks">
+                                                                    <tr *ngFor="let borrow of reqBooks">
+
+                                                                        <td>{{borrow?.btitle}}</td>
+                                                                        <td>{{borrow?.bcatag}}</td>
+                                                                        <td>{{borrow?.bisbn}}</td>
+                                                                        <td>
+                                                                            <div
+                                                                                style="display: inline; padding-left: 4px; padding-right: 4px; ">
+                                                                                <button
+                                                                                    style="display: inline; padding-left: 4px; padding-right: 4px; "
+                                                                                    type="button"
+                                                                                    class="btn btn-outline-success"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Accept request"
+                                                                                    (click)="ace(borrow)">
+                                                                                    <img src=".\assets\icons\icons8-checked-64.png"
+                                                                                        alt=""
+                                                                                        style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                                                        srcset=""></button>
+                                                                            </div>
+                                                                            <div
+                                                                                style="display: inline; padding-left: 4px; padding-right: 4px; ">
+                                                                                <button
+                                                                                    style="display: inline; padding-left: 4px; padding-right: 4px; "
+                                                                                    type="button"
+                                                                                    class="btn btn-outline-danger"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Reject request"
+                                                                                    (click)="rej(borrow)">
+                                                                                    <img src=".\assets\icons\icons8-delete-64.png"
+                                                                                        alt=""
+                                                                                        style="display: inline-block; padding-bottom: 2px; width: 20px;"
+                                                                                        srcset=""></button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <!-- <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary btn-block" (click)="delsave()"
+                                        data-dismiss="modal">Save</button> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card col-md-6">
+                            <div class="card-header text-center">
+                                Accepted Section
+                            </div>
+                            <table class="table">
+                                <thead class="thead bg-success text-light">
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Admission Id</th>
+                                        <th scope="col">Department</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of reqUsers">
+                                        <td>{{user.id}}</td>
+                                        <td>{{user.uname}}</td>
+                                        <td>{{user.uadmid}}</td>
+                                        <td>{{user.udep}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info" data-toggle="modal"
+                                                data-target="#acceptedBooks" (click)="h">
+                                                view
+                                            </button>
+                                            <div class="modal fade" id="requestBooks" tabindex="-1" role="dialog"
+                                                aria-labelledby="requestBooksLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="requestBooksLabel">Requested
+                                                                Books...</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <!-- <div>
+                                                            <table>
+                                                                <tr *ngFor="let m of reqBooks">
+                                                                    <td>{{m.btitle}}</td>
+                                                                    <td>
+                                                                        <button (click)="ace(m)">
+                                                                            Accept
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+
+                                                        </div> -->
+
+                                                        <div class="modal-footer">
+                                                            <!-- <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary btn-block" (click)="delsave()"
+                                        data-dismiss="modal">Save</button> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
